@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Diwali Cards — Interactive Festive Carousel</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="stage" id="stage" aria-roledescription="carousel" aria-label="Diwali Festive Cards">
+    <!-- Festive depth layer: 30-40 out-of-focus warm bokeh dots -->
+    <div class="bokeh-layer" id="bokeh-layer" aria-hidden="true"></div>
+
+    <!-- Active card radial/conic vignette glows -->
+    <div class="vignette-layer" aria-hidden="true">
+      <div class="vignette-glow is-active" data-card="diya"></div>
+      <div class="vignette-glow" data-card="rangoli"></div>
+      <div class="vignette-glow" data-card="phuljhadi"></div>
+      <div class="vignette-glow" data-card="genda"></div>
+    </div>
+
+    <!-- Subtle floor horizon sheen -->
+    <div class="floor-horizon" id="floor-horizon" aria-hidden="true"></div>
+
+    <!-- Static illustrated effects for prefers-reduced-motion & WebGL fallback -->
+    <div class="static-effect-layer" id="static-effect-layer" aria-hidden="true">
+      <!-- 01 Diya static flame + clay bowl + warm rings -->
+      <div class="static-fx-item is-active" data-static="diya" style="width:680px;height:680px;">
+        <svg viewBox="-340 -340 680 680" width="680" height="680">
+          <circle cx="0" cy="-210" r="190" fill="none" stroke="rgba(255,154,31,0.22)" stroke-width="2"/>
+          <circle cx="0" cy="-210" r="290" fill="none" stroke="rgba(255,154,31,0.11)" stroke-width="2"/>
+          <path d="M -52 -184 Q 0 -170 52 -184 L 38 -164 Q 0 -156 -38 -164 Z" fill="#6B2A10" stroke="#FF9A1F" stroke-width="1.5"/>
+          <path d="M 0 -295 C 28 -250 32 -208 0 -184 C -32 -208 -28 -250 0 -295 Z" fill="#FF9A1F" opacity="0.85"/>
+          <path d="M 0 -272 C 16 -240 18 -210 0 -188 C -18 -210 -16 -240 0 -272 Z" fill="#FFF1C4"/>
+        </svg>
+      </div>
+      <!-- 02 Rangoli static full 8-fold mandala -->
+      <div class="static-fx-item" data-static="rangoli" style="width:760px;height:760px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-450 -450 900 900" width="900" height="900">
+  <defs>
+    <filter id="powder-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.35" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G" result="disp"/>
+      <feGaussianBlur in="disp" stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="disp"/></feMerge>
+    </filter>
+  </defs>
+  <g id="ring-1" filter="url(#powder-glow)">
+    <circle cx="0" cy="0" r="18" fill="#E6007E" stroke="#FFF6E8" stroke-width="3"/>
+    <circle cx="0" cy="0" r="42" fill="none" stroke="#FFD21F" stroke-width="3" stroke-dasharray="6 6"/>
+    <g transform="rotate(0)">
+      <path d="M 0 -22 C 18 -42, 22 -76, 0 -98 C -22 -76, -18 -42, 0 -22 Z" fill="#FF8C00" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2.5"/>
+      <circle cx="0" cy="-62" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(45)">
+      <path d="M 0 -22 C 18 -42, 22 -76, 0 -98 C -22 -76, -18 -42, 0 -22 Z" fill="#FF8C00" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2.5"/>
+      <circle cx="0" cy="-62" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(90)">
+      <path d="M 0 -22 C 18 -42, 22 -76, 0 -98 C -22 -76, -18 -42, 0 -22 Z" fill="#FF8C00" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2.5"/>
+      <circle cx="0" cy="-62" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(135)">
+      <path d="M 0 -22 C 18 -42, 22 -76, 0 -98 C -22 -76, -18 -42, 0 -22 Z" fill="#FF8C00" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2.5"/>
+      <circle cx="0" cy="-62" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(180)">
+      <path d="M 0 -22 C 18 -42, 22 -76, 0 -98 C -22 -76, -18 -42, 0 -22 Z" fill="#FF8C00" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2.5"/>
+      <circle cx="0" cy="-62" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(225)">
+      <path d="M 0 -22 C 18 -42, 22 -76, 0 -98 C -22 -76, -18 -42, 0 -22 Z" fill="#FF8C00" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2.5"/>
+      <circle cx="0" cy="-62" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(270)">
+      <path d="M 0 -22 C 18 -42, 22 -76, 0 -98 C -22 -76, -18 -42, 0 -22 Z" fill="#FF8C00" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2.5"/>
+      <circle cx="0" cy="-62" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(315)">
+      <path d="M 0 -22 C 18 -42, 22 -76, 0 -98 C -22 -76, -18 -42, 0 -22 Z" fill="#FF8C00" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2.5"/>
+      <circle cx="0" cy="-62" r="4.5" fill="#FFF6E8"/>
+    </g>
+  </g>
+  <g id="ring-2" filter="url(#powder-glow)">
+    <circle cx="0" cy="0" r="105" fill="none" stroke="#00B3A4" stroke-width="3"/>
+    <g transform="rotate(22.5)">
+      <path d="M -28 -102 C -35 -140, -16 -168, 0 -182 C 16 -168, 35 -140, 28 -102 Z" fill="#00B3A4" fill-opacity="0.82" stroke="#FFD21F" stroke-width="2.5"/>
+      <path d="M -14 -110 C -18 -135, -8 -155, 0 -165 C 8 -155, 18 -135, 14 -110 Z" fill="#E6007E" fill-opacity="0.9"/>
+      <circle cx="0" cy="-194" r="5.5" fill="#FFD21F"/>
+    </g>
+    <g transform="rotate(67.5)">
+      <path d="M -28 -102 C -35 -140, -16 -168, 0 -182 C 16 -168, 35 -140, 28 -102 Z" fill="#00B3A4" fill-opacity="0.82" stroke="#FFD21F" stroke-width="2.5"/>
+      <path d="M -14 -110 C -18 -135, -8 -155, 0 -165 C 8 -155, 18 -135, 14 -110 Z" fill="#E6007E" fill-opacity="0.9"/>
+      <circle cx="0" cy="-194" r="5.5" fill="#FFD21F"/>
+    </g>
+    <g transform="rotate(112.5)">
+      <path d="M -28 -102 C -35 -140, -16 -168, 0 -182 C 16 -168, 35 -140, 28 -102 Z" fill="#00B3A4" fill-opacity="0.82" stroke="#FFD21F" stroke-width="2.5"/>
+      <path d="M -14 -110 C -18 -135, -8 -155, 0 -165 C 8 -155, 18 -135, 14 -110 Z" fill="#E6007E" fill-opacity="0.9"/>
+      <circle cx="0" cy="-194" r="5.5" fill="#FFD21F"/>
+    </g>
+    <g transform="rotate(157.5)">
+      <path d="M -28 -102 C -35 -140, -16 -168, 0 -182 C 16 -168, 35 -140, 28 -102 Z" fill="#00B3A4" fill-opacity="0.82" stroke="#FFD21F" stroke-width="2.5"/>
+      <path d="M -14 -110 C -18 -135, -8 -155, 0 -165 C 8 -155, 18 -135, 14 -110 Z" fill="#E6007E" fill-opacity="0.9"/>
+      <circle cx="0" cy="-194" r="5.5" fill="#FFD21F"/>
+    </g>
+    <g transform="rotate(202.5)">
+      <path d="M -28 -102 C -35 -140, -16 -168, 0 -182 C 16 -168, 35 -140, 28 -102 Z" fill="#00B3A4" fill-opacity="0.82" stroke="#FFD21F" stroke-width="2.5"/>
+      <path d="M -14 -110 C -18 -135, -8 -155, 0 -165 C 8 -155, 18 -135, 14 -110 Z" fill="#E6007E" fill-opacity="0.9"/>
+      <circle cx="0" cy="-194" r="5.5" fill="#FFD21F"/>
+    </g>
+    <g transform="rotate(247.5)">
+      <path d="M -28 -102 C -35 -140, -16 -168, 0 -182 C 16 -168, 35 -140, 28 -102 Z" fill="#00B3A4" fill-opacity="0.82" stroke="#FFD21F" stroke-width="2.5"/>
+      <path d="M -14 -110 C -18 -135, -8 -155, 0 -165 C 8 -155, 18 -135, 14 -110 Z" fill="#E6007E" fill-opacity="0.9"/>
+      <circle cx="0" cy="-194" r="5.5" fill="#FFD21F"/>
+    </g>
+    <g transform="rotate(292.5)">
+      <path d="M -28 -102 C -35 -140, -16 -168, 0 -182 C 16 -168, 35 -140, 28 -102 Z" fill="#00B3A4" fill-opacity="0.82" stroke="#FFD21F" stroke-width="2.5"/>
+      <path d="M -14 -110 C -18 -135, -8 -155, 0 -165 C 8 -155, 18 -135, 14 -110 Z" fill="#E6007E" fill-opacity="0.9"/>
+      <circle cx="0" cy="-194" r="5.5" fill="#FFD21F"/>
+    </g>
+    <g transform="rotate(337.5)">
+      <path d="M -28 -102 C -35 -140, -16 -168, 0 -182 C 16 -168, 35 -140, 28 -102 Z" fill="#00B3A4" fill-opacity="0.82" stroke="#FFD21F" stroke-width="2.5"/>
+      <path d="M -14 -110 C -18 -135, -8 -155, 0 -165 C 8 -155, 18 -135, 14 -110 Z" fill="#E6007E" fill-opacity="0.9"/>
+      <circle cx="0" cy="-194" r="5.5" fill="#FFD21F"/>
+    </g>
+  </g>
+  <g id="ring-3" filter="url(#powder-glow)">
+    <circle cx="0" cy="0" r="188" fill="none" stroke="#FFF6E8" stroke-width="2.5" stroke-dasharray="8 6"/>
+    <g transform="rotate(0.0)">
+      <path d="M -22 -192 Q 0 -268 22 -192 Z" fill="#E6007E" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-218" r="6" fill="#FFD21F"/>
+      <circle cx="0" cy="-256" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(22.5)">
+      <path d="M -22 -192 Q 0 -268 22 -192 Z" fill="#FF8C00" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-218" r="6" fill="#00B3A4"/>
+      <circle cx="0" cy="-256" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(45.0)">
+      <path d="M -22 -192 Q 0 -268 22 -192 Z" fill="#E6007E" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-218" r="6" fill="#FFD21F"/>
+      <circle cx="0" cy="-256" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(67.5)">
+      <path d="M -22 -192 Q 0 -268 22 -192 Z" fill="#FF8C00" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-218" r="6" fill="#00B3A4"/>
+      <circle cx="0" cy="-256" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(90.0)">
+      <path d="M -22 -192 Q 0 -268 22 -192 Z" fill="#E6007E" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-218" r="6" fill="#FFD21F"/>
+      <circle cx="0" cy="-256" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(112.5)">
+      <path d="M -22 -192 Q 0 -268 22 -192 Z" fill="#FF8C00" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-218" r="6" fill="#00B3A4"/>
+      <circle cx="0" cy="-256" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(135.0)">
+      <path d="M -22 -192 Q 0 -268 22 -192 Z" fill="#E6007E" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-218" r="6" fill="#FFD21F"/>
+      <circle cx="0" cy="-256" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(157.5)">
+      <path d="M -22 -192 Q 0 -268 22 -192 Z" fill="#FF8C00" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-218" r="6" fill="#00B3A4"/>
+      <circle cx="0" cy="-256" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(180.0)">
+      <path d="M -22 -192 Q 0 -268 22 -192 Z" fill="#E6007E" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-218" r="6" fill="#FFD21F"/>
+      <circle cx="0" cy="-256" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(202.5)">
+      <path d="M -22 -192 Q 0 -268 22 -192 Z" fill="#FF8C00" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-218" r="6" fill="#00B3A4"/>
+      <circle cx="0" cy="-256" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(225.0)">
+      <path d="M -22 -192 Q 0 -268 22 -192 Z" fill="#E6007E" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-218" r="6" fill="#FFD21F"/>
+      <circle cx="0" cy="-256" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(247.5)">
+      <path d="M -22 -192 Q 0 -268 22 -192 Z" fill="#FF8C00" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-218" r="6" fill="#00B3A4"/>
+      <circle cx="0" cy="-256" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(270.0)">
+      <path d="M -22 -192 Q 0 -268 22 -192 Z" fill="#E6007E" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-218" r="6" fill="#FFD21F"/>
+      <circle cx="0" cy="-256" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(292.5)">
+      <path d="M -22 -192 Q 0 -268 22 -192 Z" fill="#FF8C00" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-218" r="6" fill="#00B3A4"/>
+      <circle cx="0" cy="-256" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(315.0)">
+      <path d="M -22 -192 Q 0 -268 22 -192 Z" fill="#E6007E" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-218" r="6" fill="#FFD21F"/>
+      <circle cx="0" cy="-256" r="4.5" fill="#FFF6E8"/>
+    </g>
+    <g transform="rotate(337.5)">
+      <path d="M -22 -192 Q 0 -268 22 -192 Z" fill="#FF8C00" fill-opacity="0.85" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-218" r="6" fill="#00B3A4"/>
+      <circle cx="0" cy="-256" r="4.5" fill="#FFF6E8"/>
+    </g>
+  </g>
+  <g id="ring-4" filter="url(#powder-glow)">
+    <circle cx="0" cy="0" r="270" fill="none" stroke="#FFD21F" stroke-width="3"/>
+    <g transform="rotate(0)">
+      <path d="M -56 -266 C -68 -318, -32 -348, 0 -368 C 32 -348, 68 -318, 56 -266 C 34 -282, -34 -282, -56 -266 Z" fill="#E6007E" fill-opacity="0.78" stroke="#FFD21F" stroke-width="2.5"/>
+      <path d="M -32 -276 C -38 -310, -18 -332, 0 -346 C 18 -332, 38 -310, 32 -276 Z" fill="#FF8C00" fill-opacity="0.88" stroke="#FFF6E8" stroke-width="1.8"/>
+      <circle cx="0" cy="-310" r="8" fill="#00B3A4" stroke="#FFF6E8" stroke-width="2"/>
+      <path d="M 42 -285 C 68 -305, 88 -330, 74 -355" fill="none" stroke="#00B3A4" stroke-width="3" stroke-linecap="round"/>
+      <path d="M -42 -285 C -68 -305, -88 -330, -74 -355" fill="none" stroke="#00B3A4" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <g transform="rotate(45)">
+      <path d="M -56 -266 C -68 -318, -32 -348, 0 -368 C 32 -348, 68 -318, 56 -266 C 34 -282, -34 -282, -56 -266 Z" fill="#E6007E" fill-opacity="0.78" stroke="#FFD21F" stroke-width="2.5"/>
+      <path d="M -32 -276 C -38 -310, -18 -332, 0 -346 C 18 -332, 38 -310, 32 -276 Z" fill="#FF8C00" fill-opacity="0.88" stroke="#FFF6E8" stroke-width="1.8"/>
+      <circle cx="0" cy="-310" r="8" fill="#00B3A4" stroke="#FFF6E8" stroke-width="2"/>
+      <path d="M 42 -285 C 68 -305, 88 -330, 74 -355" fill="none" stroke="#00B3A4" stroke-width="3" stroke-linecap="round"/>
+      <path d="M -42 -285 C -68 -305, -88 -330, -74 -355" fill="none" stroke="#00B3A4" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <g transform="rotate(90)">
+      <path d="M -56 -266 C -68 -318, -32 -348, 0 -368 C 32 -348, 68 -318, 56 -266 C 34 -282, -34 -282, -56 -266 Z" fill="#E6007E" fill-opacity="0.78" stroke="#FFD21F" stroke-width="2.5"/>
+      <path d="M -32 -276 C -38 -310, -18 -332, 0 -346 C 18 -332, 38 -310, 32 -276 Z" fill="#FF8C00" fill-opacity="0.88" stroke="#FFF6E8" stroke-width="1.8"/>
+      <circle cx="0" cy="-310" r="8" fill="#00B3A4" stroke="#FFF6E8" stroke-width="2"/>
+      <path d="M 42 -285 C 68 -305, 88 -330, 74 -355" fill="none" stroke="#00B3A4" stroke-width="3" stroke-linecap="round"/>
+      <path d="M -42 -285 C -68 -305, -88 -330, -74 -355" fill="none" stroke="#00B3A4" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <g transform="rotate(135)">
+      <path d="M -56 -266 C -68 -318, -32 -348, 0 -368 C 32 -348, 68 -318, 56 -266 C 34 -282, -34 -282, -56 -266 Z" fill="#E6007E" fill-opacity="0.78" stroke="#FFD21F" stroke-width="2.5"/>
+      <path d="M -32 -276 C -38 -310, -18 -332, 0 -346 C 18 -332, 38 -310, 32 -276 Z" fill="#FF8C00" fill-opacity="0.88" stroke="#FFF6E8" stroke-width="1.8"/>
+      <circle cx="0" cy="-310" r="8" fill="#00B3A4" stroke="#FFF6E8" stroke-width="2"/>
+      <path d="M 42 -285 C 68 -305, 88 -330, 74 -355" fill="none" stroke="#00B3A4" stroke-width="3" stroke-linecap="round"/>
+      <path d="M -42 -285 C -68 -305, -88 -330, -74 -355" fill="none" stroke="#00B3A4" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <g transform="rotate(180)">
+      <path d="M -56 -266 C -68 -318, -32 -348, 0 -368 C 32 -348, 68 -318, 56 -266 C 34 -282, -34 -282, -56 -266 Z" fill="#E6007E" fill-opacity="0.78" stroke="#FFD21F" stroke-width="2.5"/>
+      <path d="M -32 -276 C -38 -310, -18 -332, 0 -346 C 18 -332, 38 -310, 32 -276 Z" fill="#FF8C00" fill-opacity="0.88" stroke="#FFF6E8" stroke-width="1.8"/>
+      <circle cx="0" cy="-310" r="8" fill="#00B3A4" stroke="#FFF6E8" stroke-width="2"/>
+      <path d="M 42 -285 C 68 -305, 88 -330, 74 -355" fill="none" stroke="#00B3A4" stroke-width="3" stroke-linecap="round"/>
+      <path d="M -42 -285 C -68 -305, -88 -330, -74 -355" fill="none" stroke="#00B3A4" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <g transform="rotate(225)">
+      <path d="M -56 -266 C -68 -318, -32 -348, 0 -368 C 32 -348, 68 -318, 56 -266 C 34 -282, -34 -282, -56 -266 Z" fill="#E6007E" fill-opacity="0.78" stroke="#FFD21F" stroke-width="2.5"/>
+      <path d="M -32 -276 C -38 -310, -18 -332, 0 -346 C 18 -332, 38 -310, 32 -276 Z" fill="#FF8C00" fill-opacity="0.88" stroke="#FFF6E8" stroke-width="1.8"/>
+      <circle cx="0" cy="-310" r="8" fill="#00B3A4" stroke="#FFF6E8" stroke-width="2"/>
+      <path d="M 42 -285 C 68 -305, 88 -330, 74 -355" fill="none" stroke="#00B3A4" stroke-width="3" stroke-linecap="round"/>
+      <path d="M -42 -285 C -68 -305, -88 -330, -74 -355" fill="none" stroke="#00B3A4" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <g transform="rotate(270)">
+      <path d="M -56 -266 C -68 -318, -32 -348, 0 -368 C 32 -348, 68 -318, 56 -266 C 34 -282, -34 -282, -56 -266 Z" fill="#E6007E" fill-opacity="0.78" stroke="#FFD21F" stroke-width="2.5"/>
+      <path d="M -32 -276 C -38 -310, -18 -332, 0 -346 C 18 -332, 38 -310, 32 -276 Z" fill="#FF8C00" fill-opacity="0.88" stroke="#FFF6E8" stroke-width="1.8"/>
+      <circle cx="0" cy="-310" r="8" fill="#00B3A4" stroke="#FFF6E8" stroke-width="2"/>
+      <path d="M 42 -285 C 68 -305, 88 -330, 74 -355" fill="none" stroke="#00B3A4" stroke-width="3" stroke-linecap="round"/>
+      <path d="M -42 -285 C -68 -305, -88 -330, -74 -355" fill="none" stroke="#00B3A4" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <g transform="rotate(315)">
+      <path d="M -56 -266 C -68 -318, -32 -348, 0 -368 C 32 -348, 68 -318, 56 -266 C 34 -282, -34 -282, -56 -266 Z" fill="#E6007E" fill-opacity="0.78" stroke="#FFD21F" stroke-width="2.5"/>
+      <path d="M -32 -276 C -38 -310, -18 -332, 0 -346 C 18 -332, 38 -310, 32 -276 Z" fill="#FF8C00" fill-opacity="0.88" stroke="#FFF6E8" stroke-width="1.8"/>
+      <circle cx="0" cy="-310" r="8" fill="#00B3A4" stroke="#FFF6E8" stroke-width="2"/>
+      <path d="M 42 -285 C 68 -305, 88 -330, 74 -355" fill="none" stroke="#00B3A4" stroke-width="3" stroke-linecap="round"/>
+      <path d="M -42 -285 C -68 -305, -88 -330, -74 -355" fill="none" stroke="#00B3A4" stroke-width="3" stroke-linecap="round"/>
+    </g>
+  </g>
+  <g id="ring-5" filter="url(#powder-glow)">
+    <circle cx="0" cy="0" r="376" fill="none" stroke="#00B3A4" stroke-width="2.5" stroke-dasharray="4 8"/>
+    <g transform="rotate(0)">
+      <path d="M 0 -378 C 14 -398, 16 -418, 0 -436 C -16 -418, -14 -398, 0 -378 Z" fill="#FFD21F" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-442" r="4" fill="#FFF6E8"/>
+      <circle cx="-106.4" cy="-395.0" r="4.5" fill="#00B3A4"/>
+      <circle cx="-68.4" cy="-403.0" r="4.5" fill="#E6007E"/>
+      <circle cx="-34.2" cy="-410.2" r="4.5" fill="#FFF6E8"/>
+      <circle cx="34.2" cy="-410.2" r="4.5" fill="#FFF6E8"/>
+      <circle cx="68.4" cy="-403.0" r="4.5" fill="#E6007E"/>
+      <circle cx="106.4" cy="-395.0" r="4.5" fill="#00B3A4"/>
+    </g>
+    <g transform="rotate(22.5)">
+      <path d="M -18 -378 Q 0 -428 18 -378 Z" fill="#00B3A4" fill-opacity="0.85" stroke="#FFD21F" stroke-width="2"/>
+      <circle cx="0" cy="-426" r="5.5" fill="#FF8C00"/>
+    </g>
+    <g transform="rotate(45)">
+      <path d="M 0 -378 C 14 -398, 16 -418, 0 -436 C -16 -418, -14 -398, 0 -378 Z" fill="#FFD21F" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-442" r="4" fill="#FFF6E8"/>
+      <circle cx="-106.4" cy="-395.0" r="4.5" fill="#00B3A4"/>
+      <circle cx="-68.4" cy="-403.0" r="4.5" fill="#E6007E"/>
+      <circle cx="-34.2" cy="-410.2" r="4.5" fill="#FFF6E8"/>
+      <circle cx="34.2" cy="-410.2" r="4.5" fill="#FFF6E8"/>
+      <circle cx="68.4" cy="-403.0" r="4.5" fill="#E6007E"/>
+      <circle cx="106.4" cy="-395.0" r="4.5" fill="#00B3A4"/>
+    </g>
+    <g transform="rotate(67.5)">
+      <path d="M -18 -378 Q 0 -428 18 -378 Z" fill="#00B3A4" fill-opacity="0.85" stroke="#FFD21F" stroke-width="2"/>
+      <circle cx="0" cy="-426" r="5.5" fill="#FF8C00"/>
+    </g>
+    <g transform="rotate(90)">
+      <path d="M 0 -378 C 14 -398, 16 -418, 0 -436 C -16 -418, -14 -398, 0 -378 Z" fill="#FFD21F" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-442" r="4" fill="#FFF6E8"/>
+      <circle cx="-106.4" cy="-395.0" r="4.5" fill="#00B3A4"/>
+      <circle cx="-68.4" cy="-403.0" r="4.5" fill="#E6007E"/>
+      <circle cx="-34.2" cy="-410.2" r="4.5" fill="#FFF6E8"/>
+      <circle cx="34.2" cy="-410.2" r="4.5" fill="#FFF6E8"/>
+      <circle cx="68.4" cy="-403.0" r="4.5" fill="#E6007E"/>
+      <circle cx="106.4" cy="-395.0" r="4.5" fill="#00B3A4"/>
+    </g>
+    <g transform="rotate(112.5)">
+      <path d="M -18 -378 Q 0 -428 18 -378 Z" fill="#00B3A4" fill-opacity="0.85" stroke="#FFD21F" stroke-width="2"/>
+      <circle cx="0" cy="-426" r="5.5" fill="#FF8C00"/>
+    </g>
+    <g transform="rotate(135)">
+      <path d="M 0 -378 C 14 -398, 16 -418, 0 -436 C -16 -418, -14 -398, 0 -378 Z" fill="#FFD21F" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-442" r="4" fill="#FFF6E8"/>
+      <circle cx="-106.4" cy="-395.0" r="4.5" fill="#00B3A4"/>
+      <circle cx="-68.4" cy="-403.0" r="4.5" fill="#E6007E"/>
+      <circle cx="-34.2" cy="-410.2" r="4.5" fill="#FFF6E8"/>
+      <circle cx="34.2" cy="-410.2" r="4.5" fill="#FFF6E8"/>
+      <circle cx="68.4" cy="-403.0" r="4.5" fill="#E6007E"/>
+      <circle cx="106.4" cy="-395.0" r="4.5" fill="#00B3A4"/>
+    </g>
+    <g transform="rotate(157.5)">
+      <path d="M -18 -378 Q 0 -428 18 -378 Z" fill="#00B3A4" fill-opacity="0.85" stroke="#FFD21F" stroke-width="2"/>
+      <circle cx="0" cy="-426" r="5.5" fill="#FF8C00"/>
+    </g>
+    <g transform="rotate(180)">
+      <path d="M 0 -378 C 14 -398, 16 -418, 0 -436 C -16 -418, -14 -398, 0 -378 Z" fill="#FFD21F" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-442" r="4" fill="#FFF6E8"/>
+      <circle cx="-106.4" cy="-395.0" r="4.5" fill="#00B3A4"/>
+      <circle cx="-68.4" cy="-403.0" r="4.5" fill="#E6007E"/>
+      <circle cx="-34.2" cy="-410.2" r="4.5" fill="#FFF6E8"/>
+      <circle cx="34.2" cy="-410.2" r="4.5" fill="#FFF6E8"/>
+      <circle cx="68.4" cy="-403.0" r="4.5" fill="#E6007E"/>
+      <circle cx="106.4" cy="-395.0" r="4.5" fill="#00B3A4"/>
+    </g>
+    <g transform="rotate(202.5)">
+      <path d="M -18 -378 Q 0 -428 18 -378 Z" fill="#00B3A4" fill-opacity="0.85" stroke="#FFD21F" stroke-width="2"/>
+      <circle cx="0" cy="-426" r="5.5" fill="#FF8C00"/>
+    </g>
+    <g transform="rotate(225)">
+      <path d="M 0 -378 C 14 -398, 16 -418, 0 -436 C -16 -418, -14 -398, 0 -378 Z" fill="#FFD21F" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-442" r="4" fill="#FFF6E8"/>
+      <circle cx="-106.4" cy="-395.0" r="4.5" fill="#00B3A4"/>
+      <circle cx="-68.4" cy="-403.0" r="4.5" fill="#E6007E"/>
+      <circle cx="-34.2" cy="-410.2" r="4.5" fill="#FFF6E8"/>
+      <circle cx="34.2" cy="-410.2" r="4.5" fill="#FFF6E8"/>
+      <circle cx="68.4" cy="-403.0" r="4.5" fill="#E6007E"/>
+      <circle cx="106.4" cy="-395.0" r="4.5" fill="#00B3A4"/>
+    </g>
+    <g transform="rotate(247.5)">
+      <path d="M -18 -378 Q 0 -428 18 -378 Z" fill="#00B3A4" fill-opacity="0.85" stroke="#FFD21F" stroke-width="2"/>
+      <circle cx="0" cy="-426" r="5.5" fill="#FF8C00"/>
+    </g>
+    <g transform="rotate(270)">
+      <path d="M 0 -378 C 14 -398, 16 -418, 0 -436 C -16 -418, -14 -398, 0 -378 Z" fill="#FFD21F" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-442" r="4" fill="#FFF6E8"/>
+      <circle cx="-106.4" cy="-395.0" r="4.5" fill="#00B3A4"/>
+      <circle cx="-68.4" cy="-403.0" r="4.5" fill="#E6007E"/>
+      <circle cx="-34.2" cy="-410.2" r="4.5" fill="#FFF6E8"/>
+      <circle cx="34.2" cy="-410.2" r="4.5" fill="#FFF6E8"/>
+      <circle cx="68.4" cy="-403.0" r="4.5" fill="#E6007E"/>
+      <circle cx="106.4" cy="-395.0" r="4.5" fill="#00B3A4"/>
+    </g>
+    <g transform="rotate(292.5)">
+      <path d="M -18 -378 Q 0 -428 18 -378 Z" fill="#00B3A4" fill-opacity="0.85" stroke="#FFD21F" stroke-width="2"/>
+      <circle cx="0" cy="-426" r="5.5" fill="#FF8C00"/>
+    </g>
+    <g transform="rotate(315)">
+      <path d="M 0 -378 C 14 -398, 16 -418, 0 -436 C -16 -418, -14 -398, 0 -378 Z" fill="#FFD21F" stroke="#FFF6E8" stroke-width="2"/>
+      <circle cx="0" cy="-442" r="4" fill="#FFF6E8"/>
+      <circle cx="-106.4" cy="-395.0" r="4.5" fill="#00B3A4"/>
+      <circle cx="-68.4" cy="-403.0" r="4.5" fill="#E6007E"/>
+      <circle cx="-34.2" cy="-410.2" r="4.5" fill="#FFF6E8"/>
+      <circle cx="34.2" cy="-410.2" r="4.5" fill="#FFF6E8"/>
+      <circle cx="68.4" cy="-403.0" r="4.5" fill="#E6007E"/>
+      <circle cx="106.4" cy="-395.0" r="4.5" fill="#00B3A4"/>
+    </g>
+    <g transform="rotate(337.5)">
+      <path d="M -18 -378 Q 0 -428 18 -378 Z" fill="#00B3A4" fill-opacity="0.85" stroke="#FFD21F" stroke-width="2"/>
+      <circle cx="0" cy="-426" r="5.5" fill="#FF8C00"/>
+    </g>
+  </g>
+</svg>
+      </div>
+      <!-- 03 Phuljhadi static frozen spark starburst -->
+      <div class="static-fx-item" data-static="phuljhadi" style="width:680px;height:680px;">
+        <svg viewBox="-340 -340 680 680" width="680" height="680">
+          <rect x="-116" y="-186" width="232" height="372" rx="116" fill="none" stroke="#FFE9A8" stroke-width="3.5" opacity="0.9"/>
+          <g stroke="#F5B800" stroke-linecap="round" opacity="0.85">
+            <line x1="0" y1="-190" x2="0" y2="-265" stroke-width="2"/>
+            <line x1="65" y1="-175" x2="115" y2="-240" stroke-width="1.8"/>
+            <line x1="-65" y1="-175" x2="-115" y2="-240" stroke-width="1.8"/>
+            <line x1="118" y1="-90" x2="195" y2="-130" stroke-width="2"/>
+            <line x1="-118" y1="-90" x2="-195" y2="-130" stroke-width="2"/>
+            <line x1="120" y1="0" x2="210" y2="8" stroke-width="2"/>
+            <line x1="-120" y1="0" x2="-210" y2="8" stroke-width="2"/>
+            <line x1="118" y1="90" x2="195" y2="140" stroke-width="1.8"/>
+            <line x1="-118" y1="90" x2="-195" y2="140" stroke-width="1.8"/>
+            <line x1="0" y1="190" x2="0" y2="260" stroke-width="2"/>
+          </g>
+        </svg>
+      </div>
+      <!-- 04 Genda static open marigold + hanging garland -->
+      <div class="static-fx-item" data-static="genda" style="width:680px;height:680px;">
+        <svg viewBox="-340 -340 680 680" width="680" height="680">
+          <circle cx="0" cy="0" r="220" fill="rgba(255,138,0,0.22)"/>
+          <circle cx="0" cy="0" r="175" fill="none" stroke="#FF8A00" stroke-width="28" stroke-dasharray="22 10" opacity="0.75"/>
+          <circle cx="0" cy="0" r="142" fill="none" stroke="#FFC300" stroke-width="22" stroke-dasharray="18 8" opacity="0.85"/>
+          <path d="M -220 -255 Q 0 -195 220 -255" fill="none" stroke="#3E7B2A" stroke-width="4"/>
+          <g fill="#FF8A00" stroke="#FFC300" stroke-width="2">
+            <circle cx="-180" cy="-244" r="14"/><circle cx="-120" cy="-230" r="14"/><circle cx="-60" cy="-220" r="14"/>
+            <circle cx="0" cy="-216" r="15"/><circle cx="60" cy="-220" r="14"/><circle cx="120" cy="-230" r="14"/><circle cx="180" cy="-244" r="14"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- DOM Card Strip (Center at 46% vh) -->
+    <div class="carousel-anchor" id="carousel-anchor">
+      <div class="card-strip" id="card-strip"></div>
+    </div>
+
+    <!-- Floor Reflection of the DOM Card Strip -->
+    <div class="reflection-anchor" id="reflection-anchor" aria-hidden="true">
+      <div class="card-strip" id="reflection-strip"></div>
+    </div>
+
+    <!-- Full-Stage WebGL Canvas (Three.js orthographic effects + flipped-Y reflection draw) -->
+    <canvas id="fx-canvas" aria-hidden="true"></canvas>
+
+    <!-- Microcopy under the row -->
+    <div class="microcopy" id="microcopy">Shubh Deepavali</div>
+
+    <!-- Optional Autoplay Toggle -->
+    <div class="controls-bar">
+      <button type="button" class="autoplay-btn" id="autoplay-btn" aria-pressed="false" title="Toggle 2.2s autoplay (pauses on hover/focus)">
+        <span class="autoplay-dot"></span>
+        <span>Autoplay</span>
+      </button>
+    </div>
+
+    <!-- Accessibility Live Region -->
+    <div class="sr-only" id="live-region" aria-live="polite" aria-atomic="true">
+      Diya, Light · Hope, active
+    </div>
+
+    <!-- Full-screen film grain (SVG feTurbulence, opacity 0.06, mix-blend: overlay) -->
+    <svg class="film-grain" aria-hidden="true">
+      <filter id="stage-film-grain">
+        <feTurbulence type="fractalNoise" baseFrequency="0.78" numOctaves="3" stitchTiles="stitch" />
+        <feColorMatrix type="saturate" values="0" />
+      </filter>
+      <rect width="100%" height="100%" filter="url(#stage-film-grain)" />
+    </svg>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
